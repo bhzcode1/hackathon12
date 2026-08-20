@@ -1,0 +1,478 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8",
+    "name": "Crime Reporting Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for testing the Crime Reporting Backend API."
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login/access-token",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login", "access-token"]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "user1@example.com",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"password\": \"SecurePassword123!\",\n  \"full_name\": \"New User\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/",
+              "host": ["{{base_url}}"],
+              "path": ["users", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Updated User Name\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Evidence",
+      "item": [
+        {
+          "name": "Upload Evidence",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/1/upload",
+              "host": ["{{base_url}}"],
+              "path": ["reports", "1", "upload"]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "crime_report_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Test evidence upload",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Evidence for Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/1/evidence",
+              "host": ["{{base_url}}"],
+              "path": ["reports", "1", "evidence"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Specific Evidence",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/evidence/1",
+              "host": ["{{base_url"]],
+              "path": ["evidence", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Evidence",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/evidence/1",
+              "host": ["{{base_url}}"],
+              "path": ["evidence", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard/stats",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Crime Types",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard/crime-types",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "crime-types"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Recent Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard/recent-reports",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "recent-reports"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Hotspots",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard/hotspots",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard", "hotspots"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Heatmap",
+      "item": [
+        {
+          "name": "Get Heatmap",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/heatmap",
+              "host": ["{{base_url}}"],
+              "path": ["reports", "heatmap"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Heatmap with Precision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/heatmap?precision=2",
+              "host": ["{{base_url}}"],
+              "path": ["reports", "heatmap"],
+              "query": [
+                {
+                  "key": "precision",
+                  "value": "2",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Crime Trends",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/analytics/crime-trends",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "crime-trends"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Severity Distribution",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/analytics/severity-distribution",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "severity-distribution"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Status Distribution",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/analytics/status-distribution",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "status-distribution"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "item": [
+        {
+          "name": "Detect Duplicate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ai/detect-duplicate",
+              "host": ["{{base_url}}"],
+              "path": ["ai", "detect-duplicate"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Victim reported stolen property\",\n  \"latitude\": 40.7128,\n  \"longitude\": -74.0060\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set base URL variable if not already set",
+          "if (!pm.environment.has(\"base_url\")) {",
+          "    pm.environment.set(\"base_url\", \"http://localhost:8000/api/v1\");",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          // Save access token from login response for use in subsequent requests
+          "if (pm.response.code === 200 && pm.request.url.path.includes(\"login\")) {",
+          "    var jsonData = pm.response.json();",
+          "    if (jsonData.access_token) {",
+          "        pm.environment.set(\"access_token\", jsonData.access_token);",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ]
+}

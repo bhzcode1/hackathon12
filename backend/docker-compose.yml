@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # Override database host to point to the db service
+      POSTGRES_SERVER: db
+    depends_on:
+      - db
+    volumes:
+      - .:/app  # For development, so we can see changes without rebuilding
+      # In production, we might not want to mount the source code, but for docker-compose dev it's okay.
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-crime_reporting}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
