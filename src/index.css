@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #0b0f1e;
+  --color-navy-900: #111731;
+  --color-navy-800: #171f42;
+  --color-navy-700: #232c56;
+
+  --color-brand-600: #6d3ff2;
+  --color-brand-500: #7c4dff;
+  --color-brand-400: #9673ff;
+
+  --color-danger-600: #dc2626;
+  --color-danger-500: #ef4444;
+
+  --color-status-pending: #f59e0b;
+  --color-status-verified: #16a34a;
+  --color-status-rejected: #ef4444;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #f4f5fb;
+  color: #14172b;
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: white;
+}
+
+/* ---------------------------------------------------------------
+   SCROLL ANIMATIONS
+   Drop your Framer Motion / scroll-animation code in here (or as
+   its own hook/component under src/animations/). Any element you
+   want to animate on scroll should get the class "reveal-on-scroll"
+   below as a hook point — wire your IntersectionObserver / Framer
+   logic to toggle an "is-visible" class on it, e.g.:
+
+   .reveal-on-scroll { opacity: 0; transform: translateY(24px); }
+   .reveal-on-scroll.is-visible { opacity: 1; transform: none; }
+------------------------------------------------------------------ */
+.reveal-on-scroll {
+  /* placeholder — replace/extend with your animation code */
+}
